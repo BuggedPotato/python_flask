@@ -1,0 +1,29 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  {{ moment.include_moment() }}
+  {{ moment.locale('pl') }}
+{% endblock %}
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a href="/" class="navbar-brand">Home</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">Menu 1</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+{% block content %}
+  <div class="container mt-2">
+    <p>Lokalna data i czas: {{ moment(currentTime).format('LLL') }}</p>
+    <p>To było {{ moment(currentTime).fromNow(refresh=True) }}</p>
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a href="/" class="navbar-brand">Home</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">Menu 1</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+{% block content %}
+  <div class="aler alert-danger mt-2">
+    <h1>Nie znaleziono strony</h1>
+  </div>
+{% endblock %}

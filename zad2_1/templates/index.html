@@ -1,0 +1,31 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+{% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+<div class="container w-25">
+    {{ wtf.quick_form(userForm, action="/handleInput") }}
+</div>
+{% if res %}
+  <div class="container w-25">
+    <h4>Wyniki:</h4>
+    <ul>
+      <li>wartość najmniejsza: {{ res.min_val }}</li>
+      <li>wartość największa: {{ res.max_val }}</li>
+      <li>średnia: {{ res.avg }}</li>
+      <li>posortowane malejąco: {{ res.desc }}</li>
+    </ul>
+  </div>
+{% endif %}
+
+{% endblock %}

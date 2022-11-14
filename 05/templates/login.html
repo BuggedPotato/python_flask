@@ -1,0 +1,30 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+{% endblock %}
+{% block navbar %}
+  {% if loginName %}
+    {% include "include/navbarlogin.html" %}
+  {% else %}
+    {% include "include/navbar.html" %}
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class="container mt-2">
+    <div class="row">
+      <form class="col-lg-4 offset-lg-4" method="post">
+        {{ login.hidden_tag() }}
+        {{ login.loginName.label(class_="form-login") }}
+        {{ login.loginName(class_="form-control") }}
+        {{ login.userPass.label(class_="form-login") }}
+        {{ login.userPass(class_="form-control") }}
+        {{ login.submit(class_="btn btn-dark mt-3 float-end") }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

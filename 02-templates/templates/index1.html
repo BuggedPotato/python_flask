@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block body %}
+  {% if name %}
+    general {{ name | upper }}obi!
+  {% else %}
+    general kenobi!
+  {% endif %}
+{% endblock %}

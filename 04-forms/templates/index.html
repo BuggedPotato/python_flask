@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+{% endblock %}
+{% block navbar %}
+  {% include "include/navbar.html" %}
+{% endblock %}
+{% block content %}
+  <div class="container mt-2">
+    <form method="post" action="/user">
+      {{ userForm.hidden_tag() }}
+      {{ userForm.userName.label(class_="form-label") }}{{ userForm.userName(class_="form-control") }}
+      {{ userForm.submit(class_="btn btn-danger mt-3") }}
+    </form>
+    {{ wtf.quick_form(userForm) }}
+    {{ wtf.quick_form(userForm, action='/user') }}
+    {{ wtf.quick_form(userForm, action=url_for('user')) }}
+  </div>
+{% endblock %}
