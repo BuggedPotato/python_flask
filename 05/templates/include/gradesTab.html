@@ -8,6 +8,7 @@
             <th>Oceny - drugi semestr</th>
             <th>Średnia</th>
             <th>Ocena semestralna</th>
+            <th>Średnia roczna</th>
             <th>Ocena roczna</th>
         </tr>
     </thead>
@@ -67,6 +68,9 @@
                             <span class="badge bg-dark">{{ interim }}</span>
                         </td>
                     {% elif category == 'yearly' %}
+                        <td>
+                            <span >{{ countAverage( subject, "year" ) }}</span>
+                        </td>
                         <td>
                             <span class="badge bg-info">{{ interim }}</span>
                         </td>

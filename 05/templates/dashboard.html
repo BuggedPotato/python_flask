@@ -22,7 +22,7 @@
     datasets: [
         {
           label: 'Średnia ocen - pierwszy semestr',
-          backgroundColor: 'rgb(110, 99, 132)',
+          backgroundColor: 'rgb(231,185,48)',
           borderColor: 'rgb(10, 80, 160)',
           data: [
               {% for subject, terms in grades.items() %}
@@ -63,7 +63,7 @@
   {% endif %}
 {% endblock %}
 {% block content %}
-  <div class="container mt-2 mx-3">
+  <div class="container mt-2 m-auto w-100">
     {% if loginName %}
         <div class="row">
             <div class="col-lg-2">
@@ -82,9 +82,9 @@
                         Najwyższa średnia:
                     </div>
                     <div class="card-body">
-                        <p class="text-start lead text-success">
-                            informatyka <span ></span>
-                        </p>
+                        {% for subject, average in getBestAverage(2).items() %}
+                            <p class="text-start lead text-success">{{ subject | title }}: {{ average }}</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -93,10 +93,10 @@
                     <div class="card-header text-secondary h5">
                         Zagrożenia:
                     </div>
-                    <div class="card-body text-danger">
-                        <p class="text-start lead text-danger">
-                            matematyka, plastyka
-                        </p>
+                    <div class="card-body">
+                        {% for subject in getDangerAverage() %}
+                            <p class="text-start lead text-danger">{{ subject | title }}</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

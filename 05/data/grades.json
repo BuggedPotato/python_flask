@@ -1,15 +1,15 @@
 {
   "matematyka": {
     "term1": {
-      "answer": [1],
-      "quiz": [2],
-      "test": [3],
+      "answer": [1,1],
+      "quiz": [2,1,1],
+      "test": [2],
       "interim": 2
     },
     "term2": {
-      "answer": [4],
-      "quiz": [5],
-      "test": [6],
+      "answer": [4,1],
+      "quiz": [5,1],
+      "test": [6,1,1],
       "interim": 5,
       "yearly": 3
     }
@@ -44,7 +44,7 @@
       "yearly": 3
     }
   },
-  "fizuka": {
+  "fizyka": {
     "term1": {
       "answer": [4,2,3,2],
       "quiz": [5,2,3,1],

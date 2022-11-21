@@ -51,16 +51,30 @@ def dashboard():
     with open( "data/grades.json" ) as gradesFile:
         grades = json.load( gradesFile )
         gradesFile.close()
-    return render_template('dashboard.html', title='Dashboard', loginName=session.get('loginName'), date=date.today(), grades=grades, countAverage=countAverage)
+    return render_template('dashboard.html', title='Dashboard', loginName=session.get('loginName'), date=date.today(), grades=grades, countAverage=countAverage, getBestAverage=getBestAverage, getDangerAverage=getDangerAverage)
 
 
-def countAverage(subjectValue, termValue):
-    with open('data/grades.json') as gradesFile:
-        grades = json.load(gradesFile)
-        gradesFile.close()
+def countAverage(subjectValue, termValue, data=None):
+    if data is None:
+        with open('data/grades.json') as gradesFile:
+            grades = json.load(gradesFile)
+            gradesFile.close()
+    else:
+        grades = data
     sumGrades = 0
     length = 0
-    if subjectValue == "" and termValue == "":
+
+    if subjectValue != "" and termValue == "year":
+        for subject, terms in grades.items():
+            if subject == subjectValue:
+                for term, categories in terms.items():
+                    for category, grades in categories.items():
+                        if category == 'answer' or category == 'quiz' or category == 'test':
+                            for grade in grades:
+                                sumGrades += grade
+                                length += 1
+
+    elif subjectValue == "" and termValue == "":
         for subject, terms in grades.items():
             for term, categories in terms.items():
                 for category, grades in categories.items():
@@ -79,6 +93,26 @@ def countAverage(subjectValue, termValue):
                                     sumGrades += grade
                                     length += 1
     return round(sumGrades/length, 2)
+
+
+def getBestAverage(count):
+    with open('data/grades.json') as gradesFile:
+        grades = json.load(gradesFile)
+        values = {subject: countAverage(subject, "year", grades) for subject, terms in grades.items()}
+        gradesFile.close()
+    return dict(sorted(values.items(), key=lambda x : x[1], reverse=True)[0:count])
+
+
+def getDangerAverage():
+    with open('data/grades.json') as gradesFile:
+        grades = json.load(gradesFile)
+        values = {subject: countAverage(subject, "year", grades) for subject, terms in grades.items()}
+        gradesFile.close()
+    out = {}
+    for key, value in values.items():
+        if value < 2:
+            out[key] = value
+    return out
 
 @app.errorhandler(404)
 def pageNotFound(error):
